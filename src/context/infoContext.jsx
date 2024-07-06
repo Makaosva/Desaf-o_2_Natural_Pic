@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { createClient } from "pexels";
 
 const client = createClient(
@@ -6,17 +6,24 @@ const client = createClient(
 );
 
 // All requests made with the client will be authenticated
-
+const PHOTO_URL = "/photos.json";
 export const InfoContext = createContext();
 
-const url = ["Ignacio", "Esteban", "Carlos", "Enrique"];
-
 export const InfoProvider = ({ children }) => {
-  const [infoM, setInfoM] = useState(infoMasculino);
+  const [photo, setPhoto] = useState(infoMasculino);
+  const [photofav, setPhotoFav] = useState(PHOTO_URL);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setPhotoFav([...favorita, photofav]);
+    alert("Foto agregada a favoritos");
+  };
+
+  const globalState = {
+    photos,
+  };
 
   return (
-    <InfoContext.Provider value={{ infoM, setInfoM }}>
-      {children}
-    </InfoContext.Provider>
+    <InfoContext.Provider value={globalState}>{children}</InfoContext.Provider>
   );
 };
