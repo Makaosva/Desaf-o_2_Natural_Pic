@@ -5,18 +5,18 @@ export const FotosContext = createContext();
 
 export const FotosProvider = ({ children }) => {
   const [fotos, setFotos] = useState([]);
-  const getData = async () => {
+  const getFotos = async () => {
     try {
       const res = await fetch(PHOTO_URL);
-      const data = await res.json();
-      setFotos(data.photos);
+      const { fotos: fotosDB } = await res.json();
+      setFotos(fotosDB.map((foto) => ({ ...foto, isFavorite: false })));
     } catch (error) {
       console.error(error.message);
     }
   };
 
   useEffect(() => {
-    getData();
+    getFotos();
   }, []);
 
   return (
