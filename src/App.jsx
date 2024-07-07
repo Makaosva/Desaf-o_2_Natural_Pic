@@ -1,23 +1,27 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+
 import Favorites from "./views/Favorites";
 import Home from "./views/Home";
-import NotFound from "./views/NotFound";
-import InfoProvider from "./context/infoContext";
+
+const PHOTO_URL = "/photos.json";
 
 const App = () => {
   return (
-    <InfoProvider>
-      <div>
-        <Navbar />
+    <div>
+      <Navbar />
 
-        <Routes>
-          <Route path="/NaturalPic" element={<Home />} />
-          <Route path="/favoritos" element={<Favorites />} />
-          <Route path="/NotFound" element={<NotFound />} />
-        </Routes>
-      </div>
-    </InfoProvider>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/favoritos"
+          element={<Favorites />}
+        />
+      </Routes>
+    </div>
   );
 };
 export default App;
