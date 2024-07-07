@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-const PHOTO_URL = "/photos.json";
+// const PHOTO_URL = "/photos.json";
+
+const PHOTO_URL = "https://api.pexels.com/v1/curated?per_page=15";
+
+const client = "GIuvIZH3E1wpqPZlH4SkzwFPPaYKCwIC2g3ZgY1YxGn1ltFkLRRm3X1Z";
 
 export const FotosContext = createContext();
 
@@ -7,15 +11,15 @@ const FotosProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
 
   const getFotos = async () => {
-    // try {
-    const res = await fetch(PHOTO_URL);
+    const res = await fetch(PHOTO_URL, {
+      headers: {
+        Authorization: client,
+      },
+    });
     const { photos: photosDB } = await res.json();
     setPhotos(photosDB.map((photo) => ({ ...photo, isFavorite: false })));
-    // } catch (error) {
-    //   console.error(error.message);
-    // }
   };
-  console.log("FotosContext", photos);
+
   useEffect(() => {
     getFotos();
   }, []);

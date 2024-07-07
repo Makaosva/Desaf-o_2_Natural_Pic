@@ -13,10 +13,7 @@ const Gallery = () => {
       return photo;
     });
     setPhotos(nuevasFotos);
-    console.log("Galleria Fotos nuevas", nuevasFotos);
   };
-
-  console.log("Galleria Fotos", photos);
 
   return (
     <div className="gallery grid-columns-5 p-3">
